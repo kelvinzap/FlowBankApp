@@ -1,0 +1,28 @@
+﻿@page "/"
+@using FlowBankAppUI.Model
+@inject IAccountData AccountData
+@inject IUserData UserData
+
+
+<h1>Hello, @(user.LastName + " " + user.FirstName + " " + user.MiddleName )</h1>
+<div>Account Balance: &#8358;@user.AccountBalance</div>
+
+<PageTitle></PageTitle>
+
+@code{
+    private string userId = "bd34f77c-6164-45eb-b62c-d32b17cdfed5";
+    private UserModel user = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userData = await UserData.GetUserAsync(userId);
+        var account = (await AccountData.GetAccountWithUserIdAsync(userId)).Balance;
+
+        user.FirstName = userData.Details.FirstName;
+        user.MiddleName = userData.Details.MiddleName;
+        user.LastName = userData.Details.LastName;
+        user.AccountBalance = account.ToString();
+    
+    }
+
+}

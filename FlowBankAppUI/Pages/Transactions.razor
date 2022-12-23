@@ -1,0 +1,76 @@
+@page "/Transactions"
+@inject ITransactionData TransactionData
+@inject IUserData UserData
+
+<PageTitle>Transactions</PageTitle>
+<div>
+    <h3>Transactions</h3>
+    
+    @if (groupedTransactions is not null)
+    {
+     foreach (var day in groupedTransactions)
+     {
+         <div class="transaction">
+             <div class="trans-date">@day.Key</div>
+                @foreach (var transaction in day)
+                 {
+                     if(transaction == day.LastOrDefault())
+                     {
+                         <div class="trans-detail-container last-trans">
+                             <div class="trans-image">
+                                 <img class="img-px" src="/Images/browser.png" alt="image" />
+                             </div>
+                             <div class="trans-detail ">
+                                 <div class="trans-info">
+                                     @(transaction.TransactionType == "debit" ? $" Payment to {transaction.CreditAccountName} Flow Bank Account" 
+                                     :  $" Incoming payment to your Flow Bank Account from {transaction.DebitAccountName}")
+                                 </div>
+                                 <div class="trans-time ">
+                                     @transaction.DateOfTransaction.ToString("HH:mm tt")
+                                 </div>
+     
+                             </div>
+                             <div class=@(transaction.TransactionType == "debit" ? "trans-amount trans-debit-color" : "trans-amount trans-credit-color")>
+                                 @(transaction.TransactionType == "debit" ? "-" : "+")<span>&#8358;</span>@transaction.Amount</div>
+                         </div>
+                     }
+     
+                     else
+                     {
+                         <div class="trans-detail-container">
+                             <div class="trans-image">
+                                 <img class="img-px" src="/Images/browser.png" alt="image" />
+                             </div>
+                             <div class="trans-detail ">
+                                 <div class="trans-info">
+                                     @(transaction.TransactionType == "debit" ? $" Payment to {transaction.CreditAccountName} Flow Bank Account"
+                                         : $" Incoming payment to your Flow Bank Account from {transaction.DebitAccountName}")
+                                 </div>
+                                 <div class="trans-time ">
+                                     @transaction.DateOfTransaction.ToString("HH:mm tt")
+                                 </div>
+     
+                             </div>
+                             <div class=@(transaction.TransactionType == "debit" ? "trans-amount trans-debit-color" : "trans-amount trans-credit-color")>
+                                 @(transaction.TransactionType == "debit" ? "-" : "+")<span>&#8358;</span>@transaction.Amount</div>
+                         </div>
+                     }
+                }
+     
+         </div>
+     
+     }   
+    }
+    
+</div>
+@code {
+    private IEnumerable<IGrouping<string, Transaction>> groupedTransactions;
+    private string userId = "bd34f77c-6164-45eb-b62c-d32b17cdfed5";
+    
+    protected override async Task OnInitializedAsync()
+    {
+       var transactions = await TransactionData.GetUserTransactions(userId);
+        groupedTransactions = transactions.OrderByDescending(x => x.DateOfTransaction).GroupBy(x => x.DateOfTransaction.ToString("d MMM yyyy"));
+    }
+
+}

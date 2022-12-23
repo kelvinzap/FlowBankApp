@@ -1,0 +1,14 @@
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\bin\Debug\net7.0\FlowBankAppLibrary.deps.json
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\bin\Debug\net7.0\FlowBankAppLibrary.runtimeconfig.json
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\bin\Debug\net7.0\FlowBankAppLibrary.dll
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\bin\Debug\net7.0\FlowBankAppLibrary.pdb
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\obj\Debug\net7.0\FlowBankAppLibrary.csproj.AssemblyReference.cache
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\obj\Debug\net7.0\FlowBankAppLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\obj\Debug\net7.0\FlowBankAppLibrary.AssemblyInfoInputs.cache
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\obj\Debug\net7.0\FlowBankAppLibrary.AssemblyInfo.cs
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\obj\Debug\net7.0\FlowBankAppLibrary.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\obj\Debug\net7.0\FlowBankAppLibrary.dll
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\obj\Debug\net7.0\refint\FlowBankAppLibrary.dll
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\obj\Debug\net7.0\FlowBankAppLibrary.pdb
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\obj\Debug\net7.0\FlowBankAppLibrary.genruntimeconfig.cache
+C:\Users\USER\source\repos\FlowBankApp\FlowBankAppLibrary\obj\Debug\net7.0\ref\FlowBankAppLibrary.dll

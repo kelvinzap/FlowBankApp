@@ -1,0 +1,164 @@
+@page "/Transfer"
+@using FlowBankAppUI.Services
+@using FlowBankAppUI.Model
+@inject IAccountService AccountService
+@inject IAccountData AccountData
+@inject ProtectedSessionStorage SessionStorage
+@inject IBankData BankData
+@inject NavigationManager NavigationManager
+
+
+<div>
+    <PageTitle>Transfer</PageTitle>
+    <h1>Transfer</h1>
+    
+    <EditForm Model="model" OnValidSubmit="CompleteTransfer">
+         <DataAnnotationsValidator/>
+         <ValidationSummary/>
+         <CustomValidator @ref="_customValidator"></CustomValidator>
+         
+           <label>
+                 Amount:<br/>
+                 <InputText id="amount" class="form-control" @bind-Value="model.Amount"></InputText>
+             </label>
+             <br/>
+             <br/>
+             <label>
+                 Account Number:<br/>
+                <input id="accountNumber" class="form-control" @onchange="PopulateCreditAccountOnChange"/>
+             </label>
+             
+             <br/>
+             <br/>
+             
+             Bank:<br/>
+             <select class="form-control bank-list" @onchange="@GetAccountName">
+                 <option value="">Select Bank</option>
+                 <option value="FLWNGLA">FLOW BANK</option>
+                 @foreach (var bank in banks)
+                 {
+                     <option value="@bank.Code">
+                         @bank.Name
+                     </option>
+                 }
+             </select>
+             @if (!string.IsNullOrEmpty(accountName) && !string.IsNullOrEmpty(model.Code))
+             {
+                 <br/>
+                 <br/>
+                 <p>
+                     Account Name:&nbsp<p>@accountName</p>
+                 </p>
+             }
+             <br/>
+             
+             <label>
+                 Narration:<br/>
+                 <InputText id="Password" type="text" class="form-control" @bind-Value="model.Description"></InputText>
+             </label>
+             <br/>
+             <br/>
+             <input type="submit" class="btn btn-primary" value="submit"/>
+
+         
+    </EditForm>
+</div>
+
+
+@code {
+    private List<Bank> banks = new();
+    string accountName;
+    private DebitAccount model = new();
+    private CustomValidator _customValidator;
+    private string userId = "bd34f77c-6164-45eb-b62c-d32b17cdfed5";
+    private string sessionId = "1234";
+    
+
+   
+    protected override async Task OnInitializedAsync()
+    {
+        banks = await BankData.GetAllBanksAsync();
+        //sessionId = (await SessionStorage.GetAsync<string>("sessionId")).Value;
+    }
+    
+    private async Task CompleteTransfer()
+    {
+        var errors = new Dictionary<string, List<string>>();
+        
+        if (string.IsNullOrEmpty(model.Amount))
+        {
+            errors.Add(nameof(model.Amount), new List<string>{"Amount must be specified"});
+            _customValidator.DisplayErrors(errors);
+            return;
+        }
+        if(Convert.ToDecimal(model.Amount) < 100)
+        {
+            errors.Add(nameof(model.Amount), new List<string> { "The amount is too small to complete the transaction" });
+            _customValidator.DisplayErrors(errors);
+            return;
+        }
+        
+         //checking user account balance
+
+        var currentLoggedInUserAccount = await AccountData.GetAccountWithUserIdAsync(userId);
+
+        if(currentLoggedInUserAccount.Id == model.CreditAccount)
+        {
+            errors.Add(nameof(model.CreditAccount), new List<string> { "Invalid Account number" });
+            _customValidator.DisplayErrors(errors);
+            return;
+        }
+        if (currentLoggedInUserAccount.Balance < Convert.ToDecimal(model.Amount))
+        {
+            errors.Add(nameof(model.CreditAccount), new List<string> { "Insufficient account balance for this transaction" });
+            _customValidator.DisplayErrors(errors);
+            return;
+        }
+        
+        //Debit Account
+        model.SessionId = sessionId;
+        model.UserId = userId;
+        
+        bool result = false;
+        
+        result = await AccountService.DebitUserAccount(model);
+        
+
+        if(result)
+            NavigationManager.NavigateTo("/");
+
+        
+        errors.Add(nameof(model.Amount), new List<string> { "Something Went Wrong" });
+        _customValidator.DisplayErrors(errors);
+        
+    }
+    
+    //Method to get the name of the account inputted if the account belongs to flowbank 
+    private async Task GetAccountName(ChangeEventArgs e)
+    {
+        model.Code = e.Value.ToString();
+
+        if (e.Value.ToString().Equals("FLWNGLA"))
+        {
+
+            model.CreditAccountName = await AccountData.GetAccountNameWithAccountIdAsync(model.CreditAccount);
+            accountName = model.CreditAccountName;
+          //  StateHasChanged();
+            return;
+        }
+
+        accountName = string.Empty;
+    }
+    
+    //
+    private async Task PopulateCreditAccountOnChange(ChangeEventArgs e)
+    {
+        if (!string.IsNullOrWhiteSpace(model.Code))
+        {
+            model.CreditAccountName = await AccountData.GetAccountNameWithAccountIdAsync(e.Value.ToString());
+            accountName = model.CreditAccountName;
+        }
+       
+        model.CreditAccount = e.Value.ToString();
+    }
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowBankAppUI", "FlowBankAppUI\FlowBankAppUI.csproj", "{06333ADC-B29F-485C-9FDA-B6BE03A49DB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowBankAppLibrary", "FlowBankAppLibrary\FlowBankAppLibrary.csproj", "{3622E6E4-CB67-40AD-893C-17B297C89119}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06333ADC-B29F-485C-9FDA-B6BE03A49DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06333ADC-B29F-485C-9FDA-B6BE03A49DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06333ADC-B29F-485C-9FDA-B6BE03A49DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06333ADC-B29F-485C-9FDA-B6BE03A49DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3622E6E4-CB67-40AD-893C-17B297C89119}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3622E6E4-CB67-40AD-893C-17B297C89119}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3622E6E4-CB67-40AD-893C-17B297C89119}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3622E6E4-CB67-40AD-893C-17B297C89119}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {125ED179-48D0-4F24-B52A-206BC8D51E39}
+	EndGlobalSection
+EndGlobal

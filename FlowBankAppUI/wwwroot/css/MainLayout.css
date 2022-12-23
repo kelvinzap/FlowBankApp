@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+}
+
+
+li, a, button{
+    font-family: "Lato";
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+.validation-message{
+    color: red;
+}
+
+.content {
+    background-color: #F8F9F9;
+}
+.navbar-area {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 6rem;
+    z-index: 901;
+    position: fixed;
+    top: 0;
+    justify-content: center;
+    background-color: #6956CA;
+}
+
+.myNavbar{
+    display: flex;
+    width: 68rem;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 30px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.nav-links-primary {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links-primary li{
+    position: relative;
+}
+
+.navbar-item {
+    display: flex;
+    font-weight: 700;
+    padding: 0 16px;
+    font-size: 17px;
+    transition: border-color .4s;
+    border: 1px solid #6956CA;
+    min-height: 3rem;
+    text-align: center;
+    align-items: center;
+    border-radius: 1.5rem;
+}
+
+.navbar-item:hover {
+    border: 1px solid rgba(209,241,255,.2);
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+.nav-links-secondary {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links-secondary li {
+    margin: 0;
+    padding: 0 0.4rem;
+}
+.navbar-icon {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.navbar-icon:hover {
+    cursor: pointer;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+.page-content {
+    margin: 153px 120px 0;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bank-list{
+    width: 207px;
+}
+
+.transaction {
+    display: flex;
+    width: 1115px;
+    flex-direction: column;
+}
+
+.trans-date {
+    background-color: #F8F9F9;
+    padding: 10px;
+}
+
+.trans-detail-container {
+    border-bottom: 1px solid;
+    display: grid;
+    grid-template-columns: 150px 736px 217px;
+    padding: 0 10px;
+    height: 116px;
+    align-items: center;
+}
+
+.last-trans {
+    border: 0;
+}
+
+.trans-image {
+    background-color: #6956CA6B;
+    border-radius: 50%;
+    width: 76px;
+    height: 76px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 61px;
+}
+
+.img-px {
+    width: 60px;
+    height: 60px;
+}
+
+.trans-amount{
+    font-size: 19px;
+}
+
+.trans-debit-color {
+    color: #EC302C;
+}
+
+.trans-credit-color {
+    color: #16B141;
+}
+
